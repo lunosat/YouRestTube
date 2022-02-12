@@ -7,6 +7,7 @@ const fs = require('fs')
 const axios = require('axios')
 const { json } = require('express/lib/response')
 const ytdl = require("discord-ytdl-core");
+const db = require('./database/database.json')
 
 const port = 3000
 
@@ -27,14 +28,12 @@ app.get('/', async (req, res) => {
     res.send('Home')
 })
 app.get('/api/play', async(req, res) => {
-    const r = await yts(req.query.q)
-
+    const r = yts(req.query.q)
     let vurl;
     let response;
     let name;
     const videos = r.videos.slice( 0, 3 )
         videos.forEach(function(v){
-        console.log(v)
         vurl = v.url
         name = v.videoId
         response = {
@@ -48,18 +47,18 @@ app.get('/api/play', async(req, res) => {
             originalUrl: v.url,
             download: 'api/download/' + v.videoId + '.mp3'
         }
-    } )
-    console.log(vurl)
-    res.status(200).json(response)
+    })
     let stream = ytdl(vurl, {
         encoderArgs: ["-af", "asetrate=44100*1.25,bass=g=20,dynaudnorm=f=150"],
         fmt: "mp3",
         opusEncoded: false
     });
     let localFile = `audios/${name}.mp3`
-    stream.pipe(fs.createWriteStream(localFile));
-    let deleteAfter = setTimeout(() => {deleteFile(localFile)}, 60000 * 5)
-   //res.send('ok')
+    stream.pipe(down = fs.createWriteStream(localFile)).on('finish', () => {
+        res.status(200).json(response)
+        let deleteAfter = setTimeout(() => {deleteFile(localFile)}, 60000 * 5)
+        db.play.reqs = db.play.reqs + 1
+    })
 })
 app.get('/api/yta', async(req, res) => {
     let error = {
