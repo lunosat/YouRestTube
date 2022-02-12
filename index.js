@@ -49,11 +49,11 @@ app.get('/api/play', async(req, res) => {
         }
     })
     let stream = ytdl(vurl, {
-        encoderArgs: ["-af", "asetrate=44100*1.25,bass=g=20,dynaudnorm=f=150"],
+        encoderArgs: ["-af"],
         fmt: "mp3",
         opusEncoded: false
     });
-    let localFile = `audios/${name}.mp3`
+    let localFile = `${name}.mp3`
     stream.pipe(down = fs.createWriteStream(localFile)).on('finish', () => {
         res.status(200).json(response)
         let deleteAfter = setTimeout(() => {deleteFile(localFile)}, 60000 * 5)
