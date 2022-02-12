@@ -52,7 +52,7 @@ app.get('/api/play', async(req, res) => {
         fmt: "mp3",
         opusEncoded: false
     });
-    let localFile = `${name}.mp3`
+    let localFile = `audios/${name}.mp3`
     stream.pipe(down = fs.createWriteStream(localFile)).on('finish', () => {
         res.status(200).json(response)
         let deleteAfter = setTimeout(() => {deleteFile(localFile)}, 60000 * 5)
