@@ -28,7 +28,7 @@ app.get('/', async (req, res) => {
     res.send('Home')
 })
 app.get('/api/play', async(req, res) => {
-    const r = yts(req.query.q)
+    const r = await yts(req.query.q)
     let vurl;
     let response;
     let name;
