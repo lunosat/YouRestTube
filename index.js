@@ -49,7 +49,6 @@ app.get('/api/play', async(req, res) => {
         }
     })
     let stream = ytdl(vurl, {
-        encoderArgs: ["-af"],
         fmt: "mp3",
         opusEncoded: false
     });
