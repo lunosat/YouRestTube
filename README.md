@@ -71,7 +71,7 @@ try{
     "timestamp":"4:24",
     "views":756927873,
     "originalUrl":"https://youtube.com/watch?v=6EEW-9NDM5k",
-    "download":"localhost:3000/download/6EEW-9NDM5k.mp3"
+    "download":"localhost:3000/download?fileId=6EEW-9NDM5k"
    }
   ```
 </details>
@@ -82,7 +82,7 @@ try{
 
 - [ ] Database
 - [ ] Create ApiKey system
-- [ ] Download
+- [x] Download
 - [ ] Create route `/search`
 - [ ] Create route `/audio`
 - [ ] Create route `/video`
