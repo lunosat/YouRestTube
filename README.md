@@ -46,13 +46,18 @@ Syntax: `/play?title=Title of video on youtube&apiKey=apiKey`
   <summary>Exemple with Axios</summary>
   
   ```js
+const axios = require('axios')
+
+let title = 'Akon - Lonely'
+let apiKey = 'todo'
+
 try{
     axios.get(`localhost:3000/play?title=${title}&apiKey=${apiKey}`).then(res => {
         console.log(res.data)
     })
 } catch (err){
     console.log(err)
-} 
+}
   ```
   
   Response: 
