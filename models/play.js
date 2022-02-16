@@ -2,6 +2,7 @@ const yts = require('yt-search')
 const fs = require('fs')
 const ytdl = require("discord-ytdl-core");
 const keys = require('../apikey.json')
+const Delete = require('../src/deleteFile')
 
 class Play {
     play(title, host, apiKey, res){
@@ -43,9 +44,10 @@ class Play {
                         timestamp: data.timestamp,
                         views: data.views,
                         originalUrl: data.url,
-                        download: host + '/download/' + data.videoId + '.mp3'
+                        download: host + '/download?fileId=' + data.videoId
                     }
                     res.status(200).json(response)
+                    Delete.audio(path, 5)
                 })
             } catch (err) {
                 res.status(500).json(JSON.stringify(err))
