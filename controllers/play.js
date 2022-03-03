@@ -5,6 +5,7 @@ module.exports = app => {
     app.get('/play', async (req, res) => {
         let title = req.query.title
         let host = req.get('host')
+        let protocol = req.get('protocol')
         let apiKey = req.query.apiKey
         if(!req.query.title || !req.query.apiKey){
             res.status(400).json({
@@ -12,7 +13,7 @@ module.exports = app => {
                 error: 'invalid request'
             })
         } else {
-            Play.play(title, host, apiKey, res)
+            Play.play(title, host, protocol, apiKey, res)
         }
     })
 }

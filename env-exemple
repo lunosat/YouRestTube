@@ -1,0 +1,13 @@
+# Use this command: cp env-exemple .env
+
+#Port
+PORT=3000
+
+#Time for delete audio (minutes), use 0 to keep files
+TFDA=5
+
+#Time for delete video (minutes), use 0 to keep files
+TFDV=10
+
+#Admin ApiKey
+AAP='todo'

@@ -4,8 +4,8 @@ const ytdl = require("discord-ytdl-core");
 const keys = require('../apikey.json')
 const Delete = require('../lib/deleteFile')
 
-class Play {
-    play(title, host, protocol, apiKey, res){
+class Audio {
+    audio(url, host, protocol, apiKey, res){
         const search = async (s) => {
             const r = await yts(s)
             const videos = r.videos.slice(0, 1)
@@ -28,9 +28,10 @@ class Play {
         }
         const save = async () => {
             try{
-                const data = await search(title)
-                const path = './downloads/audios/' + data.videoId + '.mp3'
-                let stream = ytdl(data.url, {
+                const videoId = url.includes('watch') ? url.substring(url.indexOf('=') + 1) : url.substring(url.indexOf('be') + 2);
+                //const data = await search(title)
+                const path = './downloads/audios/' + videoId + '.mp3'
+                let stream = ytdl(url, {
                     fmt: "mp3",
                     opusEncoded: false
                 });
@@ -38,13 +39,7 @@ class Play {
                 .on('finish', () => {
                     let response = {
                         git: 'https://github.com/AkirahX/Youtube-Rest-API',
-                        title: data.title,
-                        thumbnail: data.thumbnail,
-                        description: data.description,
-                        timestamp: data.timestamp,
-                        views: data.views,
-                        originalUrl: data.url,
-                        download: host + '/download?fileId=' + data.videoId
+                        download: host + '/download?fileId=' + videoId
                     }
                     res.status(200).json(response)
                     Delete.audio(path, 5)
@@ -66,4 +61,4 @@ class Play {
     }
 }
 
-module.exports = new Play
+module.exports = new Audio
