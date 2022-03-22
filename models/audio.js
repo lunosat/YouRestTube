@@ -46,7 +46,7 @@ class Audio {
                         owner: data.owner,
                         genre: data.genre,
                         date: data.date,
-                        download: host + '/download?fileId=' + data.videoId
+                        download: host + '/download?fileId=' + videoId
                     }
                     const tags = {
                         title: data.title,
