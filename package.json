@@ -16,7 +16,8 @@
     "discord-ytdl-core": "^5.0.4",
     "dotenv": "^16.0.0",
     "express": "^4.17.2",
+    "node-id3": "^0.2.3",
     "yt-search": "^2.10.3",
-    "ytdl-core": "^4.10.1"
+    "ytdl-core": "^4.11.0"
   }
 }

@@ -3,6 +3,7 @@ const fs = require('fs')
 const ytdl = require("discord-ytdl-core");
 const keys = require('../apikey.json')
 const Delete = require('../lib/deleteFile')
+const NodeID3 = require('node-id3')
 
 class Play {
     play(title, host, protocol, apiKey, res){
@@ -10,6 +11,7 @@ class Play {
             const r = await yts(s)
             const videos = r.videos.slice(0, 1)
             let v = videos[0]
+            console.log(v)
 
             let result = {
                 type: v.type,
@@ -23,6 +25,7 @@ class Play {
                 timestamp: v.timestamp,
                 ago: v.ago,
                 views: v.views,
+                author: v.author
             }
             return result
         }
@@ -46,8 +49,22 @@ class Play {
                         originalUrl: data.url,
                         download: host + '/download?fileId=' + data.videoId
                     }
+                    const tags = {
+                        title: data.title,
+                        artist: data.author.name,
+                        album: data.author.name,
+                        APIC: data.thumbnail,
+                        TRCK: "1"
+                    }
+                    const success = NodeID3.write(tags, path)
+                    
                     res.status(200).json(response)
-                    Delete.audio(path, 5)
+                    try{
+                        Delete.audio(path, 5)
+                    } catch (err) {
+                        console.log(err)
+                    }
+                    
                 })
             } catch (err) {
                 res.status(500).json(JSON.stringify(err))

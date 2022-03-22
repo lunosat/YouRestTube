@@ -47,7 +47,6 @@ class Audio {
             } catch (err) {
                 res.status(500).json(JSON.stringify(err))
             }
-            
         }
         if(keys.key.includes(apiKey)){
             save()
