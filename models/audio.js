@@ -8,6 +8,7 @@ const NodeID3 = require('node-id3')
 class Audio {
     audio(url, host, protocol, apiKey, res){
         const getInfo = async (id) => {
+            console.log(id)
             const info = await fetchVideoInfo(id)
             let resp = {
                 url: info.url,
@@ -24,7 +25,7 @@ class Audio {
         }
         const save = async () => {
             try{
-                const videoId = url.includes('watch') ? url.substring(url.indexOf('=') + 1) : url.substring(url.indexOf('be') + 2);
+                const videoId = url.includes('watch') ? url.substring(url.indexOf('=') + 1) : url.substring(url.indexOf('be') + 3);
                 const data = await getInfo(videoId)
                 const path = './downloads/audios/' + videoId + '.mp3'
                 let stream = ytdl(data.url, {
