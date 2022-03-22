@@ -17,6 +17,7 @@
     "dotenv": "^16.0.0",
     "express": "^4.17.2",
     "node-id3": "^0.2.3",
+    "updated-youtube-info": "^1.4.7",
     "yt-search": "^2.10.3",
     "ytdl-core": "^4.11.0"
   }
